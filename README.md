@@ -1,2 +1,5 @@
-# fmi-national-exam-preparation-2019
-Подготовка за държавен изпит във ФМИ, КН, 2019
+# Условия на задачите
+
+Задачите от 2018 от тук:
+
+https://fmi.uni-sofia.bg/bg/temi-za-di-bp-kompyutrni-nauki

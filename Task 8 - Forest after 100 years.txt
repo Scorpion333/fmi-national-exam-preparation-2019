@@ -1,0 +1,76 @@
+#include<iostream>
+#include<queue>
+#include<vector>
+#include<string>
+#include<fstream>
+using namespace std;
+
+// Useful for short tests
+void expect(const char* expected_output) {
+    cout << "\nExpected:\n" << expected_output << "\n\n";
+}
+
+bool valid_coords(int row, int col, int m, int n) {
+    return 0 <= row && row < m
+        && 0 <= col && col < n;
+}
+
+void after_100_years(char forest[100][100], int m, int n) {
+    for (int row = 0; row < m; row++) {
+        for (int col = 0; col < n; col++) {
+            cout << forest[row][col] << ' ';
+        }
+        cout << '\n';
+    }
+    cout << '\n';
+    
+    for (int i = 0; i < 10; i++) {
+        for (int row = 0; row < m; row++) {
+            for (int col = 0; col < n; col++) {
+                if ('1' <= forest[row][col] && forest[row][col] <= '3') {
+                    forest[row][col]++;
+                }
+                else if (forest[row][col] == '4') {
+                    int fours = 0;
+
+                    for (int row_change = -1; row_change <= 1; row_change++) {
+                        for (int col_change = -1; col_change <= 1; col_change++) {
+                            if (valid_coords(row + row_change,
+                                             col + col_change,
+                                             m, n)
+                                && forest[row + row_change][col + col_change] == '4') {
+                                fours++;
+                            }
+                        }
+                    }
+                    
+                    fours--;
+                    if (fours >= 3) {
+                        forest[row][col] = '3';
+                    }
+                }
+            }
+        }
+
+        for (int row = 0; row < m; row++) {
+            for (int col = 0; col < n; col++) {
+                cout << forest[row][col] << ' ';
+            }
+            cout << '\n';
+        }
+        cout << '\n';
+    }
+}
+
+int main() {
+    char forest[100][100] = {
+        "RR1122",
+        "1RRR12",
+        "S1RR23",
+        "44SSRR"
+    };
+
+    after_100_years(forest, 4, 6);
+
+    cout << '\n';
+}
